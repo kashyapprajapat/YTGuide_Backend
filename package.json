@@ -1,0 +1,19 @@
+{
+  "name": "ytguide_backend",
+  "version": "1.0.0",
+  "description": "Backend API For YtGuide.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
