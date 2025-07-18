@@ -14,10 +14,10 @@ jobs:
     
     steps:
     - name: 🔍 Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: 🟢 Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '20'
     
@@ -27,14 +27,18 @@ jobs:
     - name: ✅ Run Lint or Tests (Optional)
       run: echo "Add test or lint script here"
     
+    - name: 🔧 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
     - name: 🐳 Log in to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
-    - name: 🏗️ Build Docker Image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ytguide:latest .
-    
-    - name: 📤 Push Docker Image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/ytguide:latest
+    - name: 🏗️ Build and Push Docker Image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/ytguide:latest
