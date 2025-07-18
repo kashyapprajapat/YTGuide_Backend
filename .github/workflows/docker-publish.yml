@@ -27,5 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME || 'ytguide-backend' }}:latest
-
+          tags: ${{ secrets.DOCKER_USERNAME }}/ytguide-backend:latest
