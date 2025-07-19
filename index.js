@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const slowDown = require('express-slow-down');
 const { getVideoDescriptions } = require('./helpers/youtubeHelper');
 const { analyzeWithGemini } = require('./helpers/geminiHelper');
+const { analyzeWithGroq } = require('./helpers/groqHelper');
 
 app.use(cors());
 app.use(express.json());
@@ -116,6 +117,36 @@ app.post('/api/v1/youtube-urls', async (req, res) => {
   }
 });
 
+// YTGuide Version 2️⃣
+app.post('/api/v2/youtube-urls', async (req, res) => {
+  const { url1, url2, url3, goal } = req.body;
+  if (!url1 || !url2 || !url3 || !goal) {
+    return res.status(400).json({
+      message: "Please provide url1, url2, url3 and goal"
+    });
+  }
+
+  const urls = [url1, url2, url3];
+
+  try {
+    const descriptions = await getVideoDescriptions(urls);
+    const groqResponse = await analyzeWithGroq(goal, descriptions);
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Analysis complete',
+      goal,
+      groqRecommendation: groqResponse,
+      version: 'v2'
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Something went wrong',
+      error: err.message,
+      version: 'v2'
+    });
+  }
+});
 
 // Health 
 app.get('/health', (req, res) => {

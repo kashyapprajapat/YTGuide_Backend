@@ -67,7 +67,7 @@ Be thoughtful and personalized — the tone should feel like a helpful, intellig
           content: prompt
         }
       ],
-      model: "llama-3.1-70b-versatile", // Using a stable model instead of the scout model
+      model: "llama-3.1-8b-instant", 
       temperature: 0.7,
       max_tokens: 2048,
       top_p: 0.95,
@@ -80,7 +80,6 @@ Be thoughtful and personalized — the tone should feel like a helpful, intellig
       throw new Error('No content in Groq response');
     }
 
-    console.log("Groq API call successful");
     return result;
     
   } catch (error) {
