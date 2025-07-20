@@ -81,7 +81,7 @@ app.get('/', (req, res) => {
     <body>
       <h1>Welcome to YTGuide API</h1>
       <p>Your tool for analyzing and summarizing YouTube content intelligently.</p>
-      <a href="https://github.com/kashyapprajapat/YTGuide_Backend" target="_blank">View API Docs</a>
+      <a href="https://documenter.getpostman.com/view/36611651/2sB34kEJtk" target="_blank">View API Docs</a>
     </body>
     </html>
   `);
